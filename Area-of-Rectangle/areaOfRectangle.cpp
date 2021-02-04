@@ -45,6 +45,8 @@ int main()
 {
     int n;
     n = inputSize();
+
+    // Taking one input at a time
     while (n > 0)
     {
         struct rectangle r;
