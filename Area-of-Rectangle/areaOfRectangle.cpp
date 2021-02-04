@@ -47,7 +47,6 @@ void inputPoints(int n, struct rectangle r[])
 float computeDistance(struct point p1, struct point p2)
 {
     return sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2));
-    ;
 }
 
 // Calculating area of single rectangle
