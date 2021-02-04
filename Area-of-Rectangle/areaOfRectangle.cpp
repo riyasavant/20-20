@@ -44,9 +44,10 @@ void inputPoints(int n, struct rectangle r[])
     }
 }
 
-int computeDistance(struct point p1, struct point p2)
+float computeDistance(struct point p1, struct point p2)
 {
     return sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2));
+    ;
 }
 
 // Calculating area of single rectangle
@@ -60,13 +61,25 @@ int computeDistance(struct point p1, struct point p2)
 // Calculating area of array of rectangles
 void computeArea(int n, struct rectangle r[])
 {
-    float length, breadth;
+    float length, breadth, diagonal;
     for (int i = 0; i < n; i++)
     {
-        length = computeDistance(r[i].p[0], r[i].p[1]);
-        breadth = computeDistance(r[i].p[0], r[i].p[2]);
+        length = computeDistance(r[i].p[1], r[i].p[2]);
+        breadth = computeDistance(r[i].p[0], r[i].p[1]);
+        diagonal = computeDistance(r[i].p[0], r[i].p[2]);
 
-        r[i].area = length * breadth;
+        if (length <= diagonal && breadth <= diagonal)
+        {
+            r[i].area = length * breadth;
+        }
+        else if (diagonal <= length && breadth <= length)
+        {
+            r[i].area = diagonal * breadth;
+        }
+        else if (diagonal <= breadth && length <= breadth)
+        {
+            r[i].area = diagonal * length;
+        }
     }
 }
 
