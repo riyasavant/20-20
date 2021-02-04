@@ -7,12 +7,6 @@ struct fraction
     int numerator, denominator;
 };
 
-struct egyptianFraction
-{
-    int numberOfFractions;
-    struct fraction f[];
-};
-
 int inputSize()
 {
     int n;
@@ -21,18 +15,28 @@ int inputSize()
     return n;
 }
 
-void inputFractions(int n, struct egyptianFraction e[])
+void output(int m, struct fraction f[])
 {
-    int m = 0;
+    for (int j = 0; j < m; j++)
+    {
+        printf("1/%d\n", f[j].denominator);
+    }
+}
+
+void egyptianFraction(int n)
+{
+    int m;
     for (int i = 0; i < n; i++)
     {
         cin >> m;
-        e[i].numberOfFractions = m;
+        struct fraction f[m];
         for (int j = 0; j < m; j++)
         {
-            e[i].f[j].numerator = 1;
-            scanf("%f", &e[i].f[j].denominator);
+            f[j].numerator = 1;
+            scanf("%d", &f[j].denominator);
         }
+
+        output(m, f);
     }
 }
 
@@ -40,16 +44,6 @@ int main()
 {
     int n;
     n = inputSize();
-    struct egyptianFraction e[n];
-
-    inputFractions(n, e);
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < e[i].numberOfFractions; j++)
-        {
-            printf("%f", e[i].f[j].denominator);
-        }
-    }
-
+    egyptianFraction(n);
     return 0;
 }
