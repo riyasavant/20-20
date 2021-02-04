@@ -51,9 +51,20 @@ struct fraction calculateSum(int m, struct fraction f[])
     return result;
 }
 
-void egyptianFraction(int n, struct fraction result[])
+void output(int m, struct fraction f[], struct fraction result)
+{
+    for (int i = 0; i < m; i++)
+    {
+        printf("1/%d + ", f[i].denominator);
+    }
+    printf("= %d/%d\n", result.numerator, result.denominator);
+    printf("---------------\n");
+}
+
+void egyptianFraction(int n)
 {
     int m;
+    struct fraction result;
     for (int i = 0; i < n; i++)
     {
         cin >> m;
@@ -64,15 +75,8 @@ void egyptianFraction(int n, struct fraction result[])
             scanf("%d", &f[j].denominator);
         }
 
-        result[i] = calculateSum(m, f);
-    }
-}
-
-void output(int n, struct fraction result[])
-{
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d/%d\n", result[i].numerator, result[i].denominator);
+        result = calculateSum(m, f);
+        output(m, f, result);
     }
 }
 
@@ -80,8 +84,8 @@ int main()
 {
     int n;
     n = inputSize();
-    struct fraction result[n];
-    egyptianFraction(n, result);
-    output(n, result);
+    // struct fraction result[n];
+    egyptianFraction(n);
+    // output(n, result);
     return 0;
 }
