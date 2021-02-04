@@ -15,15 +15,43 @@ int inputSize()
     return n;
 }
 
-void output(int m, struct fraction f[])
+int gcd(int x, int y)
 {
-    for (int j = 0; j < m; j++)
+    if (y == 0)
     {
-        printf("1/%d\n", f[j].denominator);
+        return x;
     }
+    return gcd(y, x % y);
 }
 
-void egyptianFraction(int n)
+int lcm(int n, struct fraction f[])
+{
+    int LCM = f[0].denominator;
+    for (int i = 1; i < n; i++)
+    {
+        LCM = (LCM * f[i].denominator) / gcd(f[i].denominator, LCM);
+    }
+
+    return LCM;
+}
+
+struct fraction calculateSum(int m, struct fraction f[])
+{
+    struct fraction result;
+    int LCM = lcm(m, f);
+    int numerator = 0;
+    for (int i = 0; i < m; i++)
+    {
+        numerator += (LCM / f[i].denominator);
+    }
+
+    int GCD = gcd(numerator, LCM);
+    result.numerator = numerator / GCD;
+    result.denominator = LCM / GCD;
+    return result;
+}
+
+void egyptianFraction(int n, struct fraction result[])
 {
     int m;
     for (int i = 0; i < n; i++)
@@ -36,7 +64,15 @@ void egyptianFraction(int n)
             scanf("%d", &f[j].denominator);
         }
 
-        output(m, f);
+        result[i] = calculateSum(m, f);
+    }
+}
+
+void output(int n, struct fraction result[])
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d/%d\n", result[i].numerator, result[i].denominator);
     }
 }
 
@@ -44,6 +80,8 @@ int main()
 {
     int n;
     n = inputSize();
-    egyptianFraction(n);
+    struct fraction result[n];
+    egyptianFraction(n, result);
+    output(n, result);
     return 0;
 }
