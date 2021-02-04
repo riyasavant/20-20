@@ -3,7 +3,7 @@
 #include <math.h>
 using namespace std;
 
-struct coordinate
+struct point
 {
     float x;
     float y;
@@ -11,7 +11,7 @@ struct coordinate
 
 struct rectangle
 {
-    struct coordinate p[3];
+    struct point p[3];
     float area;
 };
 
@@ -34,7 +34,7 @@ int inputSize()
 
 // Array of Inputs
 
-void inputCoordinates(int n, struct rectangle r[])
+void inputPoints(int n, struct rectangle r[])
 {
     cout << "Enter three points for each rectangle\n";
     for (int i = 0; i < n; i++)
@@ -44,7 +44,7 @@ void inputCoordinates(int n, struct rectangle r[])
     }
 }
 
-int computeDistance(struct coordinate p1, struct coordinate p2)
+int computeDistance(struct point p1, struct point p2)
 {
     return sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2));
 }
@@ -83,9 +83,9 @@ int main()
 {
     int n;
     n = inputSize();
-
     struct rectangle r[n];
-    inputCoordinates(n, r);
+
+    inputPoints(n, r);
     computeArea(n, r);
     output(n, r);
 
@@ -97,5 +97,6 @@ int main()
     //     printf("Area: %.1f\n", computeArea(r));
     //     n--;
     // }
+
     return 0;
 }
